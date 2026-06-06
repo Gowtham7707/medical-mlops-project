@@ -30,8 +30,11 @@ jobs:
           docker push gowthamc121/medical-mlflow-project-backend:${{ github.sha }}
 
       - name: Replace Image Tag
+        shell: powershell
         run: |
-          sed -i "s|IMAGE_TAG|${{ github.sha }}|g" kserve/kserve-inference.yaml
+          (Get-Content kserve/kserve-inference.yaml) `
+          -replace 'IMAGE_TAG','${{ github.sha }}' |
+          Set-Content kserve/kserve-inference.yaml
 
       - name: Setup Kubectl
         uses: azure/setup-kubectl@v4
