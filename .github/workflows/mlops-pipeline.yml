@@ -23,9 +23,7 @@ jobs:
 
       - name: Build Backend Docker Image
         run: |
-          docker build \
-            -f Dockerfile.api \
-            -t gowthamc121/medical-mlflow-project-backend:${{ github.sha }} .
+          docker build -f Dockerfile.api -t gowthamc121/medical-mlflow-project-backend:${{ github.sha }} .
 
       - name: Push Docker Image
         run: |
