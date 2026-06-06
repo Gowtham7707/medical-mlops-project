@@ -21,9 +21,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build Docker image
+      - name: Build Backend Docker Image
         run: |
-          docker build -t gowthamc121/medical-mlflow-project-backend:${{ github.sha }} .
+          docker build \
+            -f Dockerfile.api \
+            -t gowthamc121/medical-mlflow-project-backend:${{ github.sha }} .
 
       - name: Push Docker Image
         run: |
