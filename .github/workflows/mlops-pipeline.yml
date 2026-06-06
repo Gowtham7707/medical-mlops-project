@@ -3,7 +3,8 @@ name: cardio-medical-mlflow-pipeline
 on:
   push:
     branches:
-        - main
+        - master
+  workflow_dispatch:      
 
 jobs:
   deploy:
