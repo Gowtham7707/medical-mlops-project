@@ -33,7 +33,7 @@ jobs:
 
       - name: Replace Image Tag
         run: |
-          sed -i 's|IMAGE_TAG|$ {{ github.sha }}'|g' kserve/kserve-inference.yaml
+          sed -i 's|IMAGE_TAG|${{ github.sha }}'|g' kserve/kserve-inference.yaml
 
       - name: Setup Kubectl
         uses: azure/setup-kubectl@v4
