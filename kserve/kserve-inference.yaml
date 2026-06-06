@@ -1,0 +1,18 @@
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+
+metadata:
+  name: cardio-model
+
+spec:
+
+  predictor:
+
+    containers:
+
+      - name: cardio-container
+
+        image: gowthamc121/medical-mlflow-project-backend:IMAGE_TAG
+
+        ports:
+          - containerPort: 8000

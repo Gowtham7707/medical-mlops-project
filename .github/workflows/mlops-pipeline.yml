@@ -1,0 +1,49 @@
+name: cardio-medical-mlflow-pipeline
+
+on:
+  push:
+    branches:
+        - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login DockerHub
+        uses: docker/login-action@v3
+        with: 
+          username: ${{ secret.DOCKER_USERNAME }}
+          password: ${{ secret.DOCKER_PASSWORD }}
+
+      - name: Build Docker image
+        run: |
+          docker build -t gowthamc121/medical-mlflow-project-backend:${{ github.sha }}
+
+      - name: Push Docker Image
+        run: |
+          docker push gowthamc121/medical-mlflow-project-backend:${{ github.sha }}
+
+      - name: Replace Image Tag
+        run: |
+          sed -i 's|IMAGE_TAG|$ {{ github.sha }}'|g' kserve/kserve-inference.yaml
+
+      - name: Setup Kubectl
+        uses: azure/setup-kubectl@v4
+
+      - name: Configure Kubernetes
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
+
+      - name: Deploy KServe
+        run: |
+          kubectl apply -f kserve/kserve-inference.yaml
+        
+
+
+
+     

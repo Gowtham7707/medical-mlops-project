@@ -1,0 +1,24 @@
+mlflow
+pandas
+numpy
+scikit-learn
+matplotlib
+fastapi
+uvicorn
+streamlit
+joblib
+requests
+dvc
+prometheus-fastapi-instrumentator
+
+# | Package   | Purpose             |
+# | --------- | ------------------- |
+# | pandas    | CSV/data handling   |
+# | numpy     | numerical arrays    |
+# | sklearn   | ML algorithms       |
+# | mlflow    | experiment tracking |
+# | fastapi   | backend API         |
+# | uvicorn   | ASGI server         |
+# | streamlit | frontend UI         |
+# | joblib    | save model          |
+# | requests  | HTTP API calls      |

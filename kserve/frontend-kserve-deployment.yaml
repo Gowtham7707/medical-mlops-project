@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-kserve
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: frontend
+
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: gowthamc121/medical-mlflow-project-frontend
+          ports:
+           - containerPort: 8501
+          env:
+
+            - name: API_URL
+
+              value: "http://cardio-model.default.svc.cluster.local/predict"
